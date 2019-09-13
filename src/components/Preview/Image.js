@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
-import { Data } from '../context'
+import { Data } from 'context'
 
 const PreviewImages = () => {
   const { images } = useContext(Data.Context)
 
   return (
-    <div>
+    <figure>
       {images.map(image => (
         <img
           src={image.url}
@@ -13,8 +13,8 @@ const PreviewImages = () => {
           key={image.url}
         />
       ))}
-    </div>
+    </figure>
   )
 }
 
-export { PreviewImages }
+export default PreviewImages

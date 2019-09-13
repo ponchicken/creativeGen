@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Data } from '../context'
+import { Data } from 'context'
 import CreateImgCanvas from './CreateImgCanvas'
 
 const CreateImg = () => {
