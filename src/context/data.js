@@ -3,7 +3,7 @@ import React, { useState, createContext } from 'react'
 const Context = createContext({
   images: []
 })
-const ActionsContext = createContext()
+const ActionsContext = createContext({})
 
 const Provider = ({ children }) => {
   const [images, setImages] = useState([])

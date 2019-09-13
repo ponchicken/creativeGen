@@ -7,7 +7,11 @@ const PreviewImages = () => {
   return (
     <div>
       {images.map(image => (
-        <img src={image.url} alt="" key={image.url} />
+        <img
+          src={image.url}
+          alt=""
+          key={image.url}
+        />
       ))}
     </div>
   )

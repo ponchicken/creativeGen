@@ -13,9 +13,15 @@ function App() {
   return (
     <div className="App">
       <Data.Provider>
-        <UploadFile />
-        <PreviewImages />
-        <CreateImg />
+        <div className="raw">
+          <UploadFile />
+        </div>
+        <div className="raw">
+          <PreviewImages />
+        </div>
+        <div className="raw">
+          <CreateImg />
+        </div>
       </Data.Provider>
     </div>
   )

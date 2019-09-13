@@ -9,7 +9,10 @@ body {
 
 .App {
   padding: 20px;
-  text-align: center;
+}
+
+.raw {
+  margin: 20px 0;
 }
 
 img {
