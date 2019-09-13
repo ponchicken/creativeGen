@@ -5,7 +5,7 @@ const loadImg = ({ image, ctx }) => {
 
   const imageEl = new Image()
   imageEl.src = image.url
-  console.log(image.url)
+
   const drawOptions = {
     x: 0,
     y: 0,
@@ -13,8 +13,8 @@ const loadImg = ({ image, ctx }) => {
     cropHeight: 2000,
     offsetX: 0,
     offsetY: 0,
-    scaleWidth: 200,
-    scaleHeight: 200
+    scaleWidth: 250,
+    scaleHeight: 250
   }
 
   imageEl.addEventListener(
@@ -29,9 +29,24 @@ const loadImg = ({ image, ctx }) => {
   )
 }
 
+const getDataUrl = (ref) => {
+  return HTMLCanvasElement.prototype.toDataURL.call(ref.current)
+}
+
+const downloadFromUrl = ({
+  url,
+  filename = 'file'
+}) => {
+  const link = document.createElement('a')
+  link.href = url
+  link.download = filename
+  link.click()
+}
+
 const CreateImg = ({ image }) => {
-  const canvasEl = useRef()
+  const canvasEl = useRef(null)
   const [ctx, setCtx] = useState(null)
+
 
   useEffect(() => {
     if (canvasEl) {
@@ -48,10 +63,22 @@ const CreateImg = ({ image }) => {
     }
   }, [image, ctx])
 
+  const onDownloadClick = () => {
+    const url = getDataUrl(canvasEl)
+    downloadFromUrl({
+      url,
+      filename: 'image'
+    })
+  }
+
   return (
     <div>
-      <button onClick={loadImg}>load img</button>
       <canvas ref={canvasEl} />
+      <button
+        onClick={onDownloadClick}
+      >
+        llink
+      </button>
     </div>
   )
 }
