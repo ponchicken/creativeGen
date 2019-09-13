@@ -1,4 +1,5 @@
 export * from './Preview'
 export * from './SelectImages'
+export * from './SelectSizes'
 export * from './UploadFiles'
 export * from './CreateImg'

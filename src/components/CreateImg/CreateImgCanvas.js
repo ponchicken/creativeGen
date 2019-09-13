@@ -1,7 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
 
-const loadImg = ({ image, ctx }) => {
-  ctx.imageSmoothingEnabled = true
+const loadImg = ({
+  image,
+  ctx,
+  size
+}) => {
+  // ctx.imageSmoothingEnabled = true
 
   const imageEl = new Image()
   imageEl.src = image.url
@@ -9,12 +13,12 @@ const loadImg = ({ image, ctx }) => {
   const drawOptions = {
     x: 0,
     y: 0,
-    cropWidth: 2000,
-    cropHeight: 2000,
-    offsetX: 0,
-    offsetY: 0,
-    scaleWidth: 250,
-    scaleHeight: 250
+    width: size.width,
+    height: size.height,
+    // offsetX: 0,
+    // offsetY: 0,
+    // scaleWidth: size.width,
+    // scaleHeight: size.height
   }
 
   imageEl.addEventListener(
@@ -43,7 +47,10 @@ const downloadFromUrl = ({
   link.click()
 }
 
-const CreateImg = ({ image }) => {
+const CreateImgCanvas = ({
+  image,
+  size
+}) => {
   const canvasEl = useRef(null)
   const [ctx, setCtx] = useState(null)
 
@@ -55,13 +62,14 @@ const CreateImg = ({ image }) => {
   }, [canvasEl])
 
   useEffect(() => {
-    if (image && ctx) {
+    if (image && size && ctx) {
       loadImg({
         image,
+        size,
         ctx
       })
     }
-  }, [image, ctx])
+  }, [image, size, ctx])
 
   const onDownloadClick = () => {
     const url = getDataUrl(canvasEl)
@@ -73,7 +81,11 @@ const CreateImg = ({ image }) => {
 
   return (
     <div>
-      <canvas ref={canvasEl} />
+      <canvas
+        ref={canvasEl}
+        width={size.width}
+        height={size.height}
+      />
       <button
         onClick={onDownloadClick}
       >
@@ -83,4 +95,4 @@ const CreateImg = ({ image }) => {
   )
 }
 
-export default CreateImg
+export default CreateImgCanvas

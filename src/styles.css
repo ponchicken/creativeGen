@@ -23,3 +23,11 @@ canvas {
   height: 100px;
   border: 1px solid #fff7;
 }
+
+label {
+  display: block;
+}
+
+label span {
+  margin-left: 10px;
+}

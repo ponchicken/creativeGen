@@ -9,8 +9,8 @@ const PreviewImages = () => {
       {images.map(image => (
         <img
           src={image.url}
-          alt=""
           key={image.url}
+          alt=""
         />
       ))}
     </figure>
