@@ -1,36 +1,58 @@
 import React, { useState, useRef, useEffect } from 'react'
 
+const getCropCoords = ({
+  img,
+  canvas
+}) => {
+  const scales = {
+    x: 1, y: 1
+  }
+
+  const proportions = img.width / img.height
+
+  if (img.width > canvas.width) {
+    scales.x = canvas.width / img.width
+  }
+
+  const scale = (scales.x > scales.y) ? scales.y : scales.x
+
+  return {
+    srcX: 0,
+    srcY: 0,
+    srcWidth: img.width,
+    srcHeight: img.height,
+    x: 0,
+    y: 0,
+    width: img.width * scale,
+    height: img.width * scale
+  }
+}
+
 const loadImg = ({
   image,
   ctx,
   size
 }) => {
-  // ctx.imageSmoothingEnabled = true
-
   const imageEl = new Image()
   imageEl.src = image.url
 
-  const drawOptions = {
-    x: 0,
-    y: 0,
-    width: size.width,
-    height: size.height,
-    // offsetX: 0,
-    // offsetY: 0,
-    // scaleWidth: size.width,
-    // scaleHeight: size.height
-  }
-
-  imageEl.addEventListener(
-    'load',
-    () => {
-      ctx.drawImage(
-        imageEl,
-        ...Object.entries(drawOptions).map(([k, v]) => v)
-      )
-    },
-    false
-  )
+  imageEl.addEventListener('load', () => {
+    const drawOptions = getCropCoords({
+      img: {
+        width: imageEl.naturalWidth,
+        height: imageEl.naturalHeight
+      },
+      canvas: {
+        width: size.width,
+        height: size.height
+      }
+    })
+    
+    ctx.drawImage(
+      imageEl,
+      ...Object.entries(drawOptions).map(([k, v]) => v)
+    )
+  })
 }
 
 const getDataUrl = (ref) => {
