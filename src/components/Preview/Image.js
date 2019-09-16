@@ -5,7 +5,7 @@ const PreviewImages = () => {
   const { images } = useContext(Data.Context)
 
   return (
-    <figure>
+    <div>
       {images.map(image => (
         <img
           src={image.url}
@@ -13,7 +13,7 @@ const PreviewImages = () => {
           alt=""
         />
       ))}
-    </figure>
+    </div>
   )
 }
 

@@ -6,6 +6,8 @@
   "main": "src/index.js",
   "dependencies": {
     "eslint-config-standard": "14.1.0",
+    "file-saver": "^2.0.2",
+    "jszip": "^3.2.2",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-scripts": "3.0.1"

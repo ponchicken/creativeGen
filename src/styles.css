@@ -12,6 +12,8 @@ body {
 }
 
 .raw {
+  background: #000;
+  padding: 20px;
   margin: 20px 0;
 }
 
@@ -20,7 +22,8 @@ img {
 }
 
 canvas {
-  height: 100px;
+  max-width: 200px;
+  max-height: 100px;
   border: 1px solid #fff7;
 }
 
@@ -30,4 +33,23 @@ label {
 
 label span {
   margin-left: 10px;
+}
+
+.resultImages {
+  display: grid;
+  grid-template-columns: repeat(3, 200px);
+  align-content: center;
+  grid-gap: 10px;
+}
+.resultImages > * {
+  position: relative;
+  background: #fff1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.resultImages button {
+  position: absolute;
+  right: 0;
+  top: 0;
 }

@@ -1,32 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-
-const getCropCoords = ({
-  img,
-  canvas
-}) => {
-  const scales = {
-    x: 1, y: 1
-  }
-
-  const proportions = img.width / img.height
-
-  if (img.width > canvas.width) {
-    scales.x = canvas.width / img.width
-  }
-
-  const scale = (scales.x > scales.y) ? scales.y : scales.x
-
-  return {
-    srcX: 0,
-    srcY: 0,
-    srcWidth: img.width,
-    srcHeight: img.height,
-    x: 0,
-    y: 0,
-    width: img.width * scale,
-    height: img.width * scale
-  }
-}
+import { cover } from './helpers'
 
 const loadImg = ({
   image,
@@ -37,20 +10,28 @@ const loadImg = ({
   imageEl.src = image.url
 
   imageEl.addEventListener('load', () => {
-    const drawOptions = getCropCoords({
-      img: {
-        width: imageEl.naturalWidth,
-        height: imageEl.naturalHeight
-      },
-      canvas: {
-        width: size.width,
-        height: size.height
-      }
-    })
+    const {
+      x, 
+      y, 
+      width, 
+      height
+    } =  cover(
+      imageEl.naturalWidth,
+      imageEl.naturalHeight,
+      size.width,
+      size.height
+    )
     
     ctx.drawImage(
       imageEl,
-      ...Object.entries(drawOptions).map(([k, v]) => v)
+      x,
+      y, 
+      width, 
+      height,
+      0,
+      0,
+      size.width,
+      size.height
     )
   })
 }
@@ -61,7 +42,8 @@ const getDataUrl = (ref) => {
 
 const downloadFromUrl = ({
   url,
-  filename = 'file'
+  filename = 'file',
+  onCanvasCreate
 }) => {
   const link = document.createElement('a')
   link.href = url
@@ -71,7 +53,8 @@ const downloadFromUrl = ({
 
 const CreateImgCanvas = ({
   image,
-  size
+  size,
+  onCanvasCreate
 }) => {
   const canvasEl = useRef(null)
   const [ctx, setCtx] = useState(null)
@@ -90,6 +73,7 @@ const CreateImgCanvas = ({
         size,
         ctx
       })
+      onCanvasCreate([canvasEl])
     }
   }, [image, size, ctx])
 
@@ -111,7 +95,7 @@ const CreateImgCanvas = ({
       <button
         onClick={onDownloadClick}
       >
-        llink
+        <span role='img' aria-label='download'>📥</span>
       </button>
     </div>
   )

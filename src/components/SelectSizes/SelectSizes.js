@@ -11,12 +11,12 @@ const SIZES = [
     width: 500
   },
   {
-    height: 100,
+    height: 1000,
     width: 200
   },
   {
     height: 200,
-    width: 100
+    width: 1000
   }
 ]
 
