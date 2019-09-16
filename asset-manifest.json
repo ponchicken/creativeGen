@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/creativeGen/static/css/main.da6028e5.chunk.css",
+    "main.js": "/creativeGen/static/js/main.3d2b92a8.chunk.js",
+    "main.js.map": "/creativeGen/static/js/main.3d2b92a8.chunk.js.map",
+    "runtime~main.js": "/creativeGen/static/js/runtime~main.37b18be3.js",
+    "runtime~main.js.map": "/creativeGen/static/js/runtime~main.37b18be3.js.map",
+    "static/js/2.3696ee1f.chunk.js": "/creativeGen/static/js/2.3696ee1f.chunk.js",
+    "static/js/2.3696ee1f.chunk.js.map": "/creativeGen/static/js/2.3696ee1f.chunk.js.map",
+    "index.html": "/creativeGen/index.html",
+    "precache-manifest.b098a75291f1a82439b038f110a9a560.js": "/creativeGen/precache-manifest.b098a75291f1a82439b038f110a9a560.js",
+    "service-worker.js": "/creativeGen/service-worker.js",
+    "static/css/main.da6028e5.chunk.css.map": "/creativeGen/static/css/main.da6028e5.chunk.css.map"
+  }
+}
