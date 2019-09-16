@@ -4,6 +4,15 @@
   "description": "",
   "keywords": [],
   "main": "src/index.js",
+  "homepage": "https://ponchicken.github.io/creativeGen",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
   "dependencies": {
     "eslint-config-standard": "14.1.0",
     "file-saver": "^2.0.2",
@@ -14,13 +23,8 @@
   },
   "devDependencies": {
     "@types/react": "^16.9.2",
+    "gh-pages": "^2.1.1",
     "typescript": "3.3.3"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
   },
   "browserslist": [
     ">0.2%",
