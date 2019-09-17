@@ -3,7 +3,7 @@ import React from 'react'
 import { Data } from 'context'
 
 import {
-  CreateImg, SelectImages, SelectSizes, Preview, Download
+  CreateImg, SelectImages, SelectSizes, SelectTextes, Preview, Download
 } from 'components'
 
 const Creatives = () => {
@@ -11,6 +11,12 @@ const Creatives = () => {
     <Data.Provider>
       <div className="raw">
         <SelectSizes />
+      </div>
+      <div className="raw">
+        <SelectTextes />
+      </div>
+      <div className="raw">
+        <Preview.Textes />
       </div>
       <div className="raw">
         <SelectImages />

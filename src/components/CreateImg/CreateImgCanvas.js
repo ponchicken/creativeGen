@@ -1,38 +1,48 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { cover } from './helpers'
+import Promise from 'lie'
 
 const loadImg = ({
   image,
   ctx,
   size
 }) => {
-  const imageEl = new Image()
-  imageEl.src = image.url
+  return new Promise(resolve => {
+    const imageEl = new Image()
+    imageEl.src = image.url
+  
+    imageEl.addEventListener('load', () => {
+      const {
+        x, 
+        y, 
+        width, 
+        height
+      } =  cover(
+        imageEl.naturalWidth,
+        imageEl.naturalHeight,
+        size.width,
+        size.height
+      )
+      console.log(
+        imageEl.naturalWidth,
+        imageEl.naturalHeight,
+        size.width,
+        size.height)
+      
+      ctx.drawImage(
+        imageEl,
+        x,
+        y, 
+        width, 
+        height,
+        0,
+        0,
+        size.width,
+        size.height
+      )
 
-  imageEl.addEventListener('load', () => {
-    const {
-      x, 
-      y, 
-      width, 
-      height
-    } =  cover(
-      imageEl.naturalWidth,
-      imageEl.naturalHeight,
-      size.width,
-      size.height
-    )
-    
-    ctx.drawImage(
-      imageEl,
-      x,
-      y, 
-      width, 
-      height,
-      0,
-      0,
-      size.width,
-      size.height
-    )
+      resolve(ctx)
+    })
   })
 }
 
@@ -42,8 +52,7 @@ const getDataUrl = (ref) => {
 
 const downloadFromUrl = ({
   url,
-  filename = 'file',
-  onCanvasCreate
+  filename = 'file'
 }) => {
   const link = document.createElement('a')
   link.href = url
@@ -54,11 +63,11 @@ const downloadFromUrl = ({
 const CreateImgCanvas = ({
   image,
   size,
+  text,
   onCanvasCreate
 }) => {
   const canvasEl = useRef(null)
   const [ctx, setCtx] = useState(null)
-
 
   useEffect(() => {
     if (canvasEl) {
@@ -71,11 +80,14 @@ const CreateImgCanvas = ({
       loadImg({
         image,
         size,
+        text,
         ctx
+      }).then((ctx) => {
+        onCanvasCreate([canvasEl])
       })
-      onCanvasCreate([canvasEl])
+      
     }
-  }, [image, size, ctx])
+  }, [image, size, text, ctx])
 
   const onDownloadClick = () => {
     const url = getDataUrl(canvasEl)
